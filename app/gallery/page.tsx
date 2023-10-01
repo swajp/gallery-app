@@ -3,16 +3,20 @@ import React from "react";
 import cloudinary from "cloudinary";
 import CloudinaryImage from "@/components/cloudinaryImage";
 
-type GalleryImage = {
+export type GalleryImage = {
   public_id: string;
+  tags: string[];
 };
 
 export default async function GalleryPage() {
   const results = (await cloudinary.v2.search
     .expression("resource_type:image ")
     .sort_by("public_id", "desc")
+    .with_field("tags")
     .max_results(3)
     .execute()) as { resources: GalleryImage[] };
+
+  console.log(results);
 
   return (
     <section className="mt-8">
@@ -25,15 +29,15 @@ export default async function GalleryPage() {
 
       <div className="grid grid-cols-4 gap-4">
         {results.resources.map((image, index) => (
-          <div key={index}>
-            <CloudinaryImage
-              key={image.public_id}
-              src={image.public_id}
-              alt="Image"
-              width="400"
-              height="300"
-            />
-          </div>
+          <CloudinaryImage
+            key={image.public_id}
+            src={image.public_id}
+            alt="Image"
+            publicId={image.public_id}
+            imageData={image}
+            width="400"
+            height="300"
+          />
         ))}
       </div>
     </section>
