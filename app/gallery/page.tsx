@@ -20,9 +20,7 @@ export default async function GalleryPage() {
     <section className="mt-8">
       <div className="flex justify-between mb-8">
         <h1 className="text-5xl font-medium">Gallery</h1>
-        <div>
-          <UploadButton />
-        </div>
+        <UploadButton />
       </div>
 
       <div className="grid grid-cols-4 gap-4">

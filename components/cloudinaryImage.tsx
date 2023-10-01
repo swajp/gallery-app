@@ -1,7 +1,7 @@
 "use client";
 
 import { CldImage } from "next-cloudinary";
-import React, { startTransition, useState, useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import { setFavoriteAction } from "./actions";
 import { GalleryImage } from "@/app/gallery/page";
 

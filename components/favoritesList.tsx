@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CloudinaryImage from "@/components/cloudinaryImage";
 import { GalleryImage } from "@/app/gallery/page";
 
@@ -10,6 +10,10 @@ export default function FavoriteList({
   initialResources: GalleryImage[];
 }) {
   const [resources, setResources] = useState(initialResources);
+  useEffect(() => {
+    setResources(initialResources);
+  }, [initialResources]);
+
   return (
     <div className="grid grid-cols-4 gap-4">
       {resources.map((image) => (
