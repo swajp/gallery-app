@@ -2,15 +2,11 @@ import UploadButton from "@/components/uploadButton";
 import React from "react";
 import cloudinary from "cloudinary";
 import CloudinaryImage from "@/components/cloudinaryImage";
+import { GalleryImage } from "../gallery/page";
 
-export type GalleryImage = {
-  public_id: string;
-  tags: string[];
-};
-
-export default async function GalleryPage() {
+export default async function FavoritePage() {
   const results = (await cloudinary.v2.search
-    .expression("resource_type:image ")
+    .expression("resource_type:image AND tags=favorite ")
     .sort_by("public_id", "desc")
     .with_field("tags")
     .max_results(5)
@@ -19,10 +15,7 @@ export default async function GalleryPage() {
   return (
     <section className="mt-8">
       <div className="flex justify-between mb-8">
-        <h1 className="text-5xl font-medium">Gallery</h1>
-        <div>
-          <UploadButton />
-        </div>
+        <h1 className="text-5xl font-medium">Favorites</h1>
       </div>
 
       <div className="grid grid-cols-4 gap-4">
