@@ -1,16 +1,21 @@
 "use client";
 
 import { CldImage } from "next-cloudinary";
-import React, { startTransition, useTransition } from "react";
+import React, { startTransition, useState, useTransition } from "react";
 import { setFavoriteAction } from "./actions";
 import { GalleryImage } from "@/app/gallery/page";
 
 export default function CloudinaryImage({
   ...props
-}: any & { imageData: GalleryImage }) {
+}: any & {
+  imageData: GalleryImage;
+  onUnfavorited?: (unheratedResource: GalleryImage) => void;
+}) {
   const [transition, startTransition] = useTransition();
-  const { imageData } = props;
-  const isFavorited = imageData.tags.includes("favorite");
+  const { imageData, onUnfavorited } = props;
+  const [isFavorited, setIsFavorited] = useState(
+    imageData.tags.includes("favorite")
+  );
 
   return (
     <div className="relative">
@@ -18,6 +23,8 @@ export default function CloudinaryImage({
         className="bg-white cursor-pointer  p-2 absolute top-2 right-2 rounded-xl"
         onClick={() => {
           startTransition(() => {
+            onUnfavorited?.(imageData);
+            setIsFavorited(!isFavorited);
             setFavoriteAction(imageData.public_id, isFavorited);
           });
         }}

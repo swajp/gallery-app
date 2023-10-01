@@ -1,6 +1,5 @@
 "use server";
 import cloudinary from "cloudinary";
-import { revalidatePath } from "next/cache";
 
 export async function setFavoriteAction(
   public_id: string,
@@ -13,6 +12,4 @@ export async function setFavoriteAction(
     await cloudinary.v2.uploader.add_tag("favorite", [public_id]);
     console.log("added tag");
   }
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  revalidatePath("/gallery");
 }
