@@ -4,6 +4,7 @@ import { CldImage } from "next-cloudinary";
 import React, { useState, useTransition } from "react";
 import { setFavoriteAction } from "./actions";
 import { GalleryImage } from "@/app/gallery/page";
+import { ImageMenu } from "./imageMenu";
 
 export default function CloudinaryImage({
   ...props
@@ -59,6 +60,10 @@ export default function CloudinaryImage({
           </svg>
         )}
       </div>
+      <div className="absolute left-0 p-2">
+        <ImageMenu />
+      </div>
+
       <CldImage {...props} />
     </div>
   );
