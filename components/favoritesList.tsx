@@ -16,25 +16,28 @@ export default function FavoriteList({
   }, [initialResources]);
 
   return (
-    <ImageGrid images={resources} />
-    <div className="grid grid-cols-4 gap-4">
-      {resources.map((image) => (
-        <CloudinaryImage
-          key={image.public_id}
-          src={image.public_id}
-          alt="Image"
-          imageData={image}
-          onUnfavorited={(unheratedResource: any) => {
-            setResources((resources) =>
-              resources.filter(
-                (resource) => resource.public_id !== unheratedResource.public_id
-              )
-            );
-          }}
-          width="400"
-          height="300"
-        />
-      ))}
-    </div>
+    <ImageGrid
+      images={resources}
+      getImage={(imageData: GalleryImage) => {
+        return (
+          <CloudinaryImage
+            key={imageData.public_id}
+            src={imageData.public_id}
+            alt="Image"
+            imageData={imageData}
+            onUnfavorited={(unheratedResource: any) => {
+              setResources((resources) =>
+                resources.filter(
+                  (resource) =>
+                    resource.public_id !== unheratedResource.public_id
+                )
+              );
+            }}
+            width="400"
+            height="300"
+          />
+        );
+      }}
+    />
   );
 }

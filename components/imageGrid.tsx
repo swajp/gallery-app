@@ -1,8 +1,14 @@
 import { GalleryImage } from "@/app/gallery/page";
-import React from "react";
+import React, { ReactNode } from "react";
 import CloudinaryImage from "./cloudinaryImage";
 
-export default function ImageGrid({ images }: { images: GalleryImage[] }) {
+export default function ImageGrid({
+  images,
+  getImage,
+}: {
+  images: GalleryImage[];
+  getImage: (imageData: GalleryImage) => ReactNode;
+}) {
   function getColumns(colIndex: number) {
     return images.filter((resource, index) => index % 4 === colIndex);
   }
@@ -11,16 +17,7 @@ export default function ImageGrid({ images }: { images: GalleryImage[] }) {
       {[getColumns(0), getColumns(1), getColumns(2), getColumns(3)].map(
         (column, index) => (
           <div key={index} className="flex flex-col gap-4">
-            {column.map((image) => (
-              <CloudinaryImage
-                key={image.public_id}
-                src={image.public_id}
-                alt="Image"
-                imageData={image}
-                width="400"
-                height="300"
-              />
-            ))}
+            {column.map(getImage)}
           </div>
         )
       )}

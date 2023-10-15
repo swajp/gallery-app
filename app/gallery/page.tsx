@@ -24,7 +24,21 @@ export default async function GalleryPage() {
         <h1 className="text-5xl font-medium">Gallery</h1>
         <UploadButton />
       </div>
-      <ImageGrid images={results.resources} />
+      <ImageGrid
+        getImage={(imageData: GalleryImage) => {
+          return (
+            <CloudinaryImage
+              key={imageData.public_id}
+              src={imageData.public_id}
+              alt="Image"
+              imageData={imageData}
+              width="400"
+              height="300"
+            />
+          );
+        }}
+        images={results.resources}
+      />
     </section>
   );
 }
