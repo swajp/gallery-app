@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import CloudinaryImage from "@/components/cloudinaryImage";
 import { GalleryImage } from "@/app/gallery/page";
+import ImageGrid from "./imageGrid";
 
 export default function FavoriteList({
   initialResources,
@@ -15,6 +16,7 @@ export default function FavoriteList({
   }, [initialResources]);
 
   return (
+    <ImageGrid images={resources} />
     <div className="grid grid-cols-4 gap-4">
       {resources.map((image) => (
         <CloudinaryImage

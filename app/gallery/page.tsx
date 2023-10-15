@@ -2,6 +2,8 @@ import UploadButton from "@/components/uploadButton";
 import React from "react";
 import cloudinary from "cloudinary";
 import CloudinaryImage from "@/components/cloudinaryImage";
+import { get } from "http";
+import ImageGrid from "@/components/imageGrid";
 
 export type GalleryImage = {
   public_id: string;
@@ -13,7 +15,7 @@ export default async function GalleryPage() {
     .expression("resource_type:image ")
     .sort_by("created_at", "desc")
     .with_field("tags")
-    .max_results(5)
+    .max_results(20)
     .execute()) as { resources: GalleryImage[] };
 
   return (
@@ -22,19 +24,7 @@ export default async function GalleryPage() {
         <h1 className="text-5xl font-medium">Gallery</h1>
         <UploadButton />
       </div>
-
-      <div className="grid grid-cols-4 gap-4">
-        {results.resources.map((image) => (
-          <CloudinaryImage
-            key={image.public_id}
-            src={image.public_id}
-            alt="Image"
-            imageData={image}
-            width="400"
-            height="300"
-          />
-        ))}
-      </div>
+      <ImageGrid images={results.resources} />
     </section>
   );
 }
