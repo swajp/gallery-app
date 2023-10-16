@@ -33,12 +33,11 @@ export function SideMenu() {
                 Gallery
               </Link>
             </Button>
-            <Button
-              asChild
-              variant="ghost"
-              className="w-full flex justify-start rounded-xl"
-            >
-              <Link href="albums">
+            <Link href="/albums">
+              <Button
+                variant="ghost"
+                className="w-full flex justify-start rounded-xl"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -55,8 +54,8 @@ export function SideMenu() {
                   <rect width="7" height="7" x="3" y="14" rx="1" />
                 </svg>
                 Albums
-              </Link>
-            </Button>
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               asChild

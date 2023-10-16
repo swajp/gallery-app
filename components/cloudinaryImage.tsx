@@ -61,7 +61,7 @@ export default function CloudinaryImage({
         )}
       </div>
       <div className="absolute left-0 p-2">
-        <ImageMenu />
+        <ImageMenu image={imageData} />
       </div>
 
       <CldImage {...props} />

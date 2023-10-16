@@ -11,8 +11,10 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { AddToAlbum } from "./addToAlbum";
+import { GalleryImage } from "@/app/gallery/page";
 
-export function ImageMenu() {
+export function ImageMenu({ image }: { image: GalleryImage }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -40,9 +42,8 @@ export function ImageMenu() {
         <DropdownMenuLabel>Manage image</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <FolderPlus className="mr-2 h-4 w-4" />
-            <span>Add to album</span>
+          <DropdownMenuItem asChild>
+            <AddToAlbum image={image} />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
