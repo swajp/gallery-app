@@ -9,7 +9,7 @@ export type GalleryImage = {
   tags: string[];
 };
 
-export default async function GalleryPage() {
+export default async function AlbumPage() {
   const results = (await cloudinary.v2.search
     .expression("resource_type:image ")
     .sort_by("created_at", "desc")
