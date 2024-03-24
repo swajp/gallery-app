@@ -9,7 +9,11 @@ export type GalleryImage = {
   tags: string[];
 };
 
-export default async function AlbumPage() {
+export default async function AlbumPage({
+  params: { albumName },
+}: {
+  params: { albumName: string };
+}) {
   const results = (await cloudinary.v2.search
     .expression("resource_type:image ")
     .sort_by("created_at", "desc")
@@ -20,7 +24,7 @@ export default async function AlbumPage() {
   return (
     <section className="mt-8">
       <div className="flex justify-between mb-8">
-        <h1 className="text-5xl font-medium">Gallery</h1>
+        <h1 className="text-5xl font-medium">{albumName}</h1>
         <UploadButton />
       </div>
       <ImageGrid
